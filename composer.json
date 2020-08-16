@@ -1,0 +1,15 @@
+{
+    "name": "gentritabazi/pure-php",
+    "type": "project",
+    "minimum-stability": "dev",
+    "description": "",
+    "require": {},
+    "autoload": {
+        "classmap": [
+            "App/", "Core/"
+        ],
+        "files": [
+            "core/Helpers.php"
+        ]
+    }
+}
