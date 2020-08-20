@@ -2,6 +2,20 @@
 
 /*
 |--------------------------------------------------------------------------
+| Sets a user-defined exception handler function.
+|--------------------------------------------------------------------------
+|
+*/
+
+function myException($e)
+{
+    echo responseJson(500, ['file' => $e->getFile(), 'line' => $e->getLine(), 'trace' => $e->getTrace()], ['title' => $e->getMessage()]);
+}
+
+set_exception_handler('myException');
+
+/*
+|--------------------------------------------------------------------------
 | Register The Auto Loader
 |--------------------------------------------------------------------------
 |
