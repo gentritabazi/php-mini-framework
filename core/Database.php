@@ -7,7 +7,7 @@ use PDO;
 class Database
 {
     // Specify your own database credentials.
-    private $host = DB_HOST;
+    private $dbHost = DB_HOST;
     private $dbPort = DB_PORT;
     private $dbName = DB_NAME;
     private $username = DB_USERNAME;
@@ -20,7 +20,8 @@ class Database
         $this->conn = null;
   
         try {
-            $this->conn = new PDO("mysql:host=". $this->host. ";port=". $this->dbPort. ";dbname=". $this->dbName,
+            $this->conn = new PDO(
+                "mysql:host=". $this->dbHost. ";port=". $this->dbPort. ";dbname=". $this->dbName,
                 $this->username,
                 $this->password,
                 array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION)
