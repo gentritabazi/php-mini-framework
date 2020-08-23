@@ -3,6 +3,7 @@
 namespace Core;
 
 use PDO;
+use Core\Logger;
 use Core\Database;
 
 class BaseModel
@@ -16,10 +17,22 @@ class BaseModel
         $this->db = $db->getConnection();
     }
 
+    // Get safe fields
+    public function getSafeFields()
+    {
+        foreach ($this->fillable as $key => $value) {
+            if (in_array($value, $this->hidden)) {
+                unset($this->fillable[$key]);
+            }
+        }
+
+        return $this->fillable;
+    }
+
     // Get all
     public function get()
     {
-        $query = "SELECT ". implode(", ", $this->fillable). " FROM ". $this->table_name;
+        $query = "SELECT ". implode(", ", $this->getSafeFields()). " FROM ". $this->table_name;
 
         $stmt = $this->db->prepare($query);
 
