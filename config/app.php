@@ -4,4 +4,4 @@ define('APP_START', microtime(true));
 
 define('SHOW_ERRORS', true);
 
-define('APP_SUB_DIRECTORY', '/pure-php');
+define('APP_SUB_DIRECTORY', '/GitHub/pure-php');
