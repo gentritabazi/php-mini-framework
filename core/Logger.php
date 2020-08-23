@@ -33,7 +33,10 @@ class Logger
     {
         $date = date('Y-m-d H:i:s');
         $severity = "[$level]";
-        $message = "$date $severity : $message";
-        self::getInstance()->writeToFile($message);
+        if (is_array($message)) {
+            $message = json_encode($message);
+        }
+        $fullMessage = "$date $severity : $message";
+        self::getInstance()->writeToFile($fullMessage);
     }
 }
