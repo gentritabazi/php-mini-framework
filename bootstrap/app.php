@@ -5,6 +5,8 @@
 | Sets a user-defined exception handler function.
 |--------------------------------------------------------------------------
 |
+| Customize errors.
+|
 */
 
 function myException($e)
