@@ -18,7 +18,7 @@ $userController = new UserController();
 
 // Users
 $router->respond('GET', '/users', function () use ($userController) {
-    echo $userController->all();
+    echo $userController->getAll();
 });
 $router->respond('GET', '/users/(int:id)', function ($id) use ($userController) {
     echo $userController->getById($id);

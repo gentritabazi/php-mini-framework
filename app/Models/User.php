@@ -7,7 +7,10 @@ use Core\BaseModel;
 class User extends BaseModel
 {
     // Table name.
-    protected $table_name = "users";
+    protected $table_name = 'users';
+
+    // Primary key.
+    protected $primaryKey = 'id';
   
     // The attributes that are mass assignable.
     protected $fillable = ['first_name', 'last_name', 'email', 'password'];

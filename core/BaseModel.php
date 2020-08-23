@@ -9,6 +9,7 @@ use Core\Database;
 class BaseModel
 {
     public $db;
+    protected $primaryKey = 'id';
 
     // Constructor with $db as database connection.
     public function __construct()
@@ -32,7 +33,19 @@ class BaseModel
     // Get all
     public function get()
     {
-        $query = "SELECT ". implode(", ", $this->getSafeFields()). " FROM ". $this->table_name;
+        $query = "SELECT ". $this->primaryKey. ', '. implode(", ", $this->getSafeFields()). " FROM ". $this->table_name;
+
+        $stmt = $this->db->prepare($query);
+
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    // Get by id
+    public function getById($id)
+    {
+        $query = "SELECT ". implode(", ", $this->getSafeFields()). " FROM ". $this->table_name. " WHERE id = ". $id;
 
         $stmt = $this->db->prepare($query);
 

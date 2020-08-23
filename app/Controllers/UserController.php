@@ -15,26 +15,13 @@ class UserController extends BaseController
         $this->model = new User();
     }
     
-    public function all()
+    public function getAll()
     {
         return $this->response(200, $this->model->get());
     }
 
-    public function update()
+    public function getById($id)
     {
-        return $this->response(200, $this->request->getBody());
-
-        return $this->response(200, [
-            'id' => 1
-        ]);
-    }
-
-    public function create()
-    {
-        return $this->response(200, $this->request->getBody());
-
-        return $this->response(200, [
-            'id' => 1
-        ]);
+        return $this->response(200, $this->model->getById($id));
     }
 }
