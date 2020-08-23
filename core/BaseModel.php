@@ -45,11 +45,13 @@ class BaseModel
     // Get by id
     public function getById($id)
     {
-        $query = "SELECT ". implode(", ", $this->getSafeFields()). " FROM ". $this->table_name. " WHERE id = ". $id;
+        $query = "SELECT ". implode(", ", $this->getSafeFields()). " FROM ". $this->table_name. " WHERE id = :id";
 
         $stmt = $this->db->prepare($query);
 
-        $stmt->execute();
+        $stmt->execute([
+            'id' => $id
+        ]);
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
