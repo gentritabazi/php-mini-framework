@@ -15,7 +15,7 @@ class BaseModel
     public function __construct()
     {
         $db = new Database();
-        $this->db = $db->getConnection();
+        $this->db = $db->connection();
     }
 
     // Get safe fields
