@@ -4,12 +4,12 @@ namespace Core;
 
 class Request
 {
-    public function getParameters()
+    public function parameters()
     {
         return $_GET;
     }
 
-    public function getBody()
+    public function body()
     {
         $data = array();
 
