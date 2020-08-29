@@ -2,22 +2,6 @@
 
 /*
 |--------------------------------------------------------------------------
-| Sets a user-defined exception handler function.
-|--------------------------------------------------------------------------
-|
-| Customize errors.
-|
-*/
-
-function myException($e)
-{
-    echo responseJson(500, ['file' => $e->getFile(), 'line' => $e->getLine(), 'trace' => $e->getTrace()], ['title' => $e->getMessage()]);
-}
-
-set_exception_handler('myException');
-
-/*
-|--------------------------------------------------------------------------
 | Register The Auto Loader
 |--------------------------------------------------------------------------
 |
@@ -29,6 +13,18 @@ set_exception_handler('myException');
 */
 
 require __DIR__. '/../vendor/autoload.php';
+
+/*
+|--------------------------------------------------------------------------
+| Create The Application
+|--------------------------------------------------------------------------
+|
+| Here we will load the environment and create the application instance
+| that serves as the central piece of this framework.
+|
+*/
+
+$app = new Core\Application(null);
 
 /*
 |--------------------------------------------------------------------------
@@ -50,3 +46,5 @@ if (SHOW_ERRORS) {
 }
 
 require __DIR__. '/../routes/api.php';
+
+return $app;
