@@ -7,7 +7,7 @@ use Core\BaseModel;
 class User extends BaseModel
 {
     // Table name.
-    protected $table_name = 'users';
+    protected $tableName = 'users';
 
     // Primary key.
     protected $primaryKey = 'id';
