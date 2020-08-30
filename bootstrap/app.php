@@ -24,7 +24,7 @@ require __DIR__. '/../vendor/autoload.php';
 |
 */
 
-$app = new Core\Application(null);
+$app = new Core\Application(dirname(__DIR__));
 
 /*
 |--------------------------------------------------------------------------
