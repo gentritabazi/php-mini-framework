@@ -57,4 +57,16 @@ class Application
     {
         echo responseJson(500, ['file' => $e->getFile(), 'line' => $e->getLine(), 'trace' => $e->getTrace()], ['title' => $e->getMessage()]);
     }
+
+    /**
+     * Get the base path for the application.
+     *
+     * @return string
+     */
+    public function basePath()
+    {
+        $this->basePath = realpath(getcwd(). '/../');
+
+        return $this->basePath;
+    }
 }
