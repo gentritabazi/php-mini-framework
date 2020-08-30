@@ -36,6 +36,9 @@ class Logger
         if (is_array($message)) {
             $message = json_encode($message);
         }
+        if (is_object($message)) {
+            $message = serialize($message);
+        }
         $fullMessage = "$date $severity : $message";
         self::getInstance()->writeToFile($fullMessage);
     }
