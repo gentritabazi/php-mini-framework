@@ -15,7 +15,7 @@ class BaseModel
     public function __construct()
     {
         $db = new Database();
-        $this->db = $db->connection();
+        $this->db = $db;
     }
 
     // Get safe fields
@@ -33,26 +33,24 @@ class BaseModel
     // Get all
     public function get()
     {
-        $query = "SELECT ". $this->primaryKey. ', '. implode(", ", $this->getSafeFields()). " FROM ". $this->table_name;
+        $fields = $this->getSafeFields();
+        array_unshift($fields, $this->primaryKey);
 
-        $stmt = $this->db->prepare($query);
-
-        $stmt->execute();
-
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $this->db->table($this->tableName)->statement('select')->select($fields)->execute();
     }
 
     // Get by id
     public function getById($id)
     {
-        $query = "SELECT ". implode(", ", $this->getSafeFields()). " FROM ". $this->table_name. " WHERE id = :id";
+        $fields = $this->getSafeFields();
+        array_unshift($fields, $this->primaryKey);
 
-        $stmt = $this->db->prepare($query);
+        return $this->db->table($this->tableName)->statement('select')->select($fields)->where(['id'])->execute(['id' => $id]);
+    }
 
-        $stmt->execute([
-            'id' => $id
-        ]);
-
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    // Create
+    public function create(array $data)
+    {
+        return $this->db->table($this->tableName)->statement('insert')->insert($this->fillable)->execute($data);
     }
 }
