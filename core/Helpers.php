@@ -10,3 +10,14 @@ function responseJson($status = 200, $data = [], $messages = [])
         'data' => $data
     ]);
 }
+
+// Array key prefix
+function arrayKeyPrefix($keyprefix, array $array)
+{
+    foreach ($array as $k=>$v) {
+        $array[$keyprefix.$k] = $v;
+        unset($array[$k]);
+    }
+
+    return $array;
+}
