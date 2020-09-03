@@ -37,20 +37,6 @@ class Database
         return $this;
     }
 
-    public function statement(string $statement = null)
-    {
-        $allowedStatements = ['select', 'insert', 'update', 'delete'];
-
-        if (!in_array($statement, $allowedStatements)) {
-            throw new Exception('Statement is not allowed.');
-        }
-
-
-        $this->statement = $statement;
-
-        return $this;
-    }
-
     public function insert(array $fields = [])
     {
         $prefixedFields = preg_filter('/^/', ':', $fields);
@@ -58,13 +44,31 @@ class Database
         $sql = 'INSERT INTO '. $this->table. ' ('. implode(', ', $fields). ') VALUES ('. implode(', ', $prefixedFields). ')';
 
         $this->sql = $sql;
+        $this->statement = 'insert';
+
+        return $this;
+    }
+
+    public function update(array $fields = [])
+    {
+        $totalFields = count($fields);
+        $i = 1;
+        $sql = 'UPDATE '. $this->table. ' SET';
+
+        foreach ($fields as $field) {
+            $sql .= ' '. $field. ' = :'. $field. (($i == $totalFields) ? null : ',');
+            $i++;
+        }
+
+        $this->sql = $sql;
+        $this->statement = 'update';
 
         return $this;
     }
 
     public function where(array $fields = [])
     {
-        $sql = ' WHERE ';
+        $sql = ' WHERE';
 
         foreach ($fields as $value) {
             $sql .= ' '. $value. ' = :'. $value;
@@ -92,7 +96,7 @@ class Database
             $stmt = $stmt->prepare($this->sql);
 
             if ($stmt->execute(arrayKeyPrefix(':', $data))) {
-                if ($this->statement == 'select') {
+                if ($this->statement == null) {
                     return $stmt->fetchAll(PDO::FETCH_ASSOC);
                 }
 

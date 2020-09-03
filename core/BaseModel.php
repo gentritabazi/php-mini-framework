@@ -36,7 +36,7 @@ class BaseModel
         $fields = $this->getSafeFields();
         array_unshift($fields, $this->primaryKey);
 
-        return $this->db->table($this->tableName)->statement('select')->select($fields)->execute();
+        return $this->db->table($this->tableName)->select($fields)->execute();
     }
 
     // Get by id
@@ -45,12 +45,18 @@ class BaseModel
         $fields = $this->getSafeFields();
         array_unshift($fields, $this->primaryKey);
 
-        return $this->db->table($this->tableName)->statement('select')->select($fields)->where(['id'])->execute(['id' => $id]);
+        return $this->db->table($this->tableName)->select($fields)->where(['id'])->execute(['id' => $id]);
     }
 
     // Create
     public function create(array $data)
     {
-        return $this->db->table($this->tableName)->statement('insert')->insert($this->fillable)->execute($data);
+        return $this->db->table($this->tableName)->insert($this->fillable)->execute($data);
+    }
+
+    // Update
+    public function update(array $data, string $id)
+    {
+        return $this->db->table($this->tableName)->update($this->fillable)->where(['id'])->execute($data + ['id' => $id]);
     }
 }
