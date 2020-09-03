@@ -29,6 +29,13 @@ class UserController extends BaseController
     {
         $user = $this->model->create($this->request->body());
         
-        return $this->response(200, $user);
+        return $this->response(200, [], ['title' => 'User successfully created.']);
+    }
+
+    public function update($userId)
+    {
+        $user = $this->model->update($this->request->parameters(), $userId);
+        
+        return $this->response(200, [], ['title' => 'User successfully updated.']);
     }
 }
