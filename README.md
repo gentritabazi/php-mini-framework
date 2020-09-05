@@ -17,5 +17,5 @@ This mini application helps you build a great application by adapting to the req
   - Controllers system.
   - Database base class.
   - Logger.
-  - modern exception handler for APIs.
+  - Modern exception handler for APIs.
   - Clean directories structure.
