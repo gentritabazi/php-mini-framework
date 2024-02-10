@@ -6,15 +6,15 @@ use Core\BaseModel;
 
 class User extends BaseModel
 {
-    // Table name.
+    // Table name
     protected $tableName = 'users';
 
-    // Primary key.
+    // Primary key
     protected $primaryKey = 'id';
   
-    // The attributes that are mass assignable.
+    // The attributes that are mass assignable
     protected $fillable = ['first_name', 'last_name', 'email', 'password'];
    
-    // The attributes that should be hidden for arrays.
+    // The attributes that should be hidden for arrays
     protected $hidden = ['password'];
 }
