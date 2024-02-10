@@ -31,7 +31,7 @@ class UserController extends BaseController
     {
         $userData = $this->request->body();
         $user = $this->userModel->create($userData);
-        return $this->response(200, [], ['title' => 'User successfully created.']);
+        return $this->response(201, [], ['title' => 'User successfully created.']);
     }
 
     public function update($userId)
