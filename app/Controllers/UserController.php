@@ -7,35 +7,37 @@ use Core\BaseController;
 
 class UserController extends BaseController
 {
-    private $model;
+    private $userModel;
 
     public function __construct()
     {
         parent::__construct();
-        $this->model = new User();
+        $this->userModel = new User();
     }
     
     public function getAll()
     {
-        return $this->response(200, $this->model->get());
+        $users = $this->userModel->get();
+        return $this->response(200, $users);
     }
 
     public function getById($id)
     {
-        return $this->response(200, $this->model->getById($id));
+        $user = $this->userModel->getById($id);
+        return $this->response(200, $user);
     }
 
     public function create()
     {
-        $user = $this->model->create($this->request->body());
-        
+        $userData = $this->request->body();
+        $user = $this->userModel->create($userData);
         return $this->response(200, [], ['title' => 'User successfully created.']);
     }
 
     public function update($userId)
     {
-        $user = $this->model->update($this->request->parameters(), $userId);
-        
+        $userData = $this->request->parameters();
+        $user = $this->userModel->update($userData, $userId);
         return $this->response(200, [], ['title' => 'User successfully updated.']);
     }
 }
