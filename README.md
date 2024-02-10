@@ -3,8 +3,9 @@
 This mini application helps you build a great application by adapting to the requirements of the application, the idea is to create everything you need for your application, not to use frameworks where 50% of the framework code will not be used and your application will be so slow.
 
 # Installation
-  - Clone project.
+  - Clone the project.
   - Run: `composer dump-autoload`.
+  - Run the Application: `php -S localhost:8080 public/index.php`.
 
 # Ready APIs!
   - Get all users.
